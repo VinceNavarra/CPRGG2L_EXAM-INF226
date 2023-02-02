@@ -1,24 +1,56 @@
-public class Recursion {
+public class recursion1 {
+
     public static void main(String[] args) {
-        String fullName = "vince jordan m. navarra";
-        System.out.println(removeLetter(fullName));
-    }
-
-    static String removeLetter(String str) {
-        if (str.isEmpty()) {
-            return "";
-        }
         
-        String vowels = "aeiou";
-        char firstChar = str.charAt(0);
-        String lastName = str.substring(str.lastIndexOf(" ") + 1);
-        char lastLetter = lastName.charAt(lastName.length() - 1);
-        boolean isVowel = vowels.indexOf(lastLetter) != -1;
+        // Remove letters (30 pts)
 
-        if ((isVowel && vowels.indexOf(firstChar) != -1) || (!isVowel && vowels.indexOf(firstChar) == -1)) {
-            return removeLetter(str.substring(1));
-        } else {
-            return str.charAt(0) + removeLetter(str.substring(1));
+        // Instructions (Important!)
+
+        // Without using arrays or loops or regular expressions, apply recursion to remove specific letters in
+        // your full name.
+
+        // 1. If the last letter of your surname is a vowel, remove all detachLetters in
+        // your full name.
+
+        // 2. If the last letter of your surname is a consonant, remove all
+        // consonants in your full name.
+
+        // 3. Use only lowercase letters
+        
+        // 4. Each letter should be removed one by one.
+
+        // Example:
+        // Full name is "elizer ponio jr".
+        // The output should be "lzr pn jr".
+
+        // Put your complete name in the "fullName" variable.
+        // Example:
+        // String fullName = "elizer ponio jr";
+
+        String fullName = "vince jordan m. navarra";
+
+        removeLetter(fullName);
+        
+    }
+   
+    static void removeLetter(String str) {
+        detachLetters(str, "");
+    } 
+    static String detachLetters(String str, String outcome) {
+        if(str.length() == 0) {
+            return outcome;
+        }
+        char v = str.charAt(0);
+        switch (v) {
+        case 'a':
+        case 'e':
+        case 'i':
+        case 'o':
+        case 'u':
+        System.out.println(outcome + str.substring(1));
+            return detachLetters(str.substring(1), outcome);
+            default:
+            return v + detachLetters(str.substring(1), outcome + v);
         }
     }
 }
